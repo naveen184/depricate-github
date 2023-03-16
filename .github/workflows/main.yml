@@ -29,3 +29,11 @@ jobs:
           echo ${{ env.envName }}
           echo ${{ env.id }}
           echo ${{ env.env }}
+
+      - name: Retrieve output values
+        run: |
+          echo "Output values:"
+          echo "envName = ${{ env.envName }}"
+          echo "id = ${{ env.id }}"
+          echo "env = ${{ env.env }}"
+
