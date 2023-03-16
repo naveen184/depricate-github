@@ -1,0 +1,31 @@
+name: testing
+
+on:
+  workflow_dispatch:
+    inputs:
+      env:
+        type: string
+        required: true
+env:
+  envname: dev02
+  id: '01'
+
+jobs:
+  job1:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: if
+        run: |
+          echo "id=id=`echo dev | tr -d -c 0-9` && if [ -z $id ]; then id=01; fi" >> $GITHUB_ENV
+          echo "env=`echo ${{ inputs.env }} | tr -d -c a-z`" >> $GITHUB_ENV
+      - name: Set env name
+        run: |
+          echo "envName=`echo ${{ inputs.env }} | sed -e 's/\b\(.\)/\u\1/g'`${{ env.id }}" >> $GITHUB_ENV
+      - name: echo env name
+        run: |
+          echo ${{ env.envName }}
+          echo ${{ env.id }}
+          echo ${{ env.env }}
