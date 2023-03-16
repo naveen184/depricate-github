@@ -1,0 +1,11 @@
+name: Example Workflow
+on: [push]
+jobs:
+  example_job:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Output
+        run: echo "::set-output name=my_output::Hello, world!"
+        id: my_step
+      - name: Print Output
+        run: echo "Output is ${{ steps.my_step.outputs.my_output }}"
