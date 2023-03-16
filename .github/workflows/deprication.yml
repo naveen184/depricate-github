@@ -5,7 +5,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set Output
-        run: echo "::set-output name=my_output::Hello, world!"
-        id: my_step
+        run: |
+          echo "my_output=Hello, world!" >> $GITHUB_ENV
       - name: Print Output
-        run: echo "Output is ${{ steps.my_step.outputs.my_output }}"
+        run: |
+          echo "Output is ${{ env.my_output }}"
